@@ -24,16 +24,6 @@ int main(void)
         n10++;
         troco -= 10;
     }
-    if (troco >= 10)
-    {
-        n10++;
-        troco -= 10;
-    }
-    if (troco >= 5)
-    {
-        n5++;
-        troco -= 5;
-    }
     if (troco >= 5)
     {
         n5++;
@@ -48,11 +38,6 @@ int main(void)
     {
         m1++;
         troco -= 1;
-    }
-    if (troco >= 0.50)
-    {
-        m50++;
-        troco -= 0.50;
     }
     if (troco >= 0.50)
     {
