@@ -9,36 +9,36 @@ double calculo(int d, double p, int i)
 
     else
     {
-        double de;
+        double de = 0;
 
         if (d == 0)
         {
-            de = p - p * 0.75;
+            de = p * 0.25;
         }
 
-        if (d == 1)
+        else if (d == 1)
         {
-            de = p - p * 0.8;
+            de = p * 0.2;
         }
 
-        if (d == 2)
+        else if (d == 2)
         {
-            de = p - p * 0.82;
+            de = p * 0.18;
         }
         
-        if (d == 3)
+        else if (d == 3)
         {
-            de = p - p * 0.85;
+            de = p * 0.15;
         }
         
-        if (d == 4)
+        else if (d == 4)
         {
-            de = p - p * 0.88;
+            de = p * 0.12;
         }
         
-        if (d == 5)
+        else if (d == 5)
         {
-            de = p - p * 0.9;
+            de = p * 0.1;
         }
 
         if (p <= 100)
@@ -46,9 +46,17 @@ double calculo(int d, double p, int i)
             de = de / 2;
         }
 
-        if (p - de > 45)
+        if (p > 45)
         {
-            p -= de;
+            if (p - de < 45)
+            {
+                p = 45;
+            }
+
+            else 
+            {
+                p -= de;
+            }
         }
 
         return calculo(d, p, i + 1);
