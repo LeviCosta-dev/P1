@@ -4,11 +4,13 @@
 //----------------------------------------------------------------------------------------//
 
 
+void achar_inicio(int arr[], int tam, int i, int m);
 void contar(int i, int fim, int v[]);
 void imprimir(int v[], int tam, int i);
-void intervalo(int v[], int m, int tam, int i, int in, int f);
 void ler (int qnt, int i, int v[]);
 int maior(int v[], int tam, int i, int m);
+int percorrer(int arr[], int tam, int i, int m);
+void sequencia(int arr[], int tam, int i, int m, int se, int c, int f);
 void zerar(int v[], int tam, int i);
 
 
@@ -26,6 +28,34 @@ int main(void)
     imprimir(sus, s, 0);
     int m = maior(sus, s, 0, sus[0]);
     printf("%d\n", m);
+    achar_inicio(sus, s, 0, m);
+    sequencia(sus, s, 0, m, 0, 0, 0);
+}
+
+
+//----------------------------------------------------------------------------------------//
+
+
+void achar_inicio(int arr[], int tam, int i, int m)
+{
+    if (i == tam)
+    {
+        return;
+    }
+
+    else
+    {
+        if (arr[i] == m)
+        {
+            int fim = percorrer(arr, tam, i, m);
+            printf("%d %d\n", i, fim);
+            achar_inicio(arr, tam, fim + 1, m);
+        }
+        else
+        {
+            achar_inicio(arr, tam, i + 1, m);
+        }
+    }
 }
 
 
@@ -72,27 +102,6 @@ void imprimir(int v[], int tam, int i)
 //----------------------------------------------------------------------------------------//
 
 
-void intervalo(int v[], int m, int tam, int i, int in, int f)
-{
-    if (tam == i)
-    {
-        return;
-    }
-
-    else
-    {
-        int aux = in;
-        if (v[i] == m)
-        {
-            in = v[i];
-        }
-    }
-}
-
-
-//----------------------------------------------------------------------------------------//
-
-
 // Função que escaneia dois valores e chama a função contar
 void ler (int qnt, int i, int v[])
 {
@@ -129,6 +138,67 @@ int maior(int v[], int tam, int i, int m)
         }
 
         return maior(v, tam, i + 1, m);
+    }
+}
+
+
+//----------------------------------------------------------------------------------------//
+
+
+int percorrer(int arr[], int tam, int i, int m)
+{
+    if (i == tam)
+    {
+        return i - 1;
+    }
+
+    else
+    {
+        if (arr[i] == m)
+        {
+            return percorrer(arr, tam, i + 1, m);
+        }
+        else
+        {
+            return i - 1;
+        }
+    }
+}
+
+
+//----------------------------------------------------------------------------------------//
+
+
+void sequencia(int arr[], int tam, int i, int m, int se, int c, int f)
+{
+    if (i == tam)
+    {
+        printf("maior sequencia: %d\n", se);
+        printf("comeca em: %d\n", c);
+        printf("termina em: %d\n", f);
+        return;
+    }
+
+    else
+    {
+        if (arr[i] == m)
+        {
+            int fim = percorrer(arr, tam, i, m);
+            int aux = fim - i + 1;
+            if (aux > se)
+            {
+                se = aux;
+                f = fim;
+                c = i;
+            }
+
+            sequencia(arr, tam, fim + 1, m, se, c, f);
+        }
+        
+        else
+        {
+            sequencia(arr, tam, i + 1, m, se, c, f);
+        }
     }
 }
 
